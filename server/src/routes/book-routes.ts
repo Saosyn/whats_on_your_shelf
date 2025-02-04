@@ -19,7 +19,7 @@ const router = express();
 router.use(express.json());
 
 // GET route to fetch books from Open Library API
-router.get('/books', async (req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
   try {
     const searchTerm = req.query.search as string; // Get the search term from query parameters
 
@@ -29,9 +29,9 @@ router.get('/books', async (req: Request, res: Response) => {
         searchTerm
       )}&fields=title`
     );
-
+    const responseData = await openLibraryResponse.data;
     // Extract the titles from the response data
-    const bookTitles = openLibraryResponse.data.docs.map(
+    const bookTitles = responseData.docs.map(
       (book: { title: string }) => book.title
     );
 

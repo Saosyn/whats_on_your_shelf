@@ -7,13 +7,14 @@ import axios from 'axios';
 const router = express();
 router.use(express.json());
 // GET route to fetch books from Open Library API
-router.get('/books', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const searchTerm = req.query.search; // Get the search term from query parameters
         // Fetch book data from Open Library API using axios
         const openLibraryResponse = await axios.get(`http://openlibrary.org/search.json?q=${encodeURIComponent(searchTerm)}&fields=title`);
+        const responseData = await openLibraryResponse.data;
         // Extract the titles from the response data
-        const bookTitles = openLibraryResponse.data.docs.map((book) => book.title);
+        const bookTitles = responseData.docs.map((book) => book.title);
         res.status(200).json({ bookTitles });
     }
     catch (error) {

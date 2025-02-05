@@ -25,8 +25,25 @@ export const login = async (req, res) => {
     const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' });
     return res.json({ token }); // Send the token as a JSON response
 };
+// //SignUp
+// export const signup = async (req: Request, res: Response) => {
+//   // TODO: If the user exists and the password is correct, return a JWT token
+//   const { username, password } = req.body;
+//   try {
+//     const user = await User.create({
+//       username,
+//       password,
+//     });
+//     const secretKey = process.env.JWT_SECRET_KEY || "";
+//     const token = jwt.sign({ username }, secretKey, { expiresIn: "1h" });
+//     return res.json({ token, user });
+//   } catch (err) {
+//     return res.status(500).json({ message: err });
+//   }
+// };
 // Create a new router instance
 const router = Router();
 // POST /login - Login a user
 router.post('/login', login); // Define the login route
+// router.post("/signup", signup);
 export default router; // Export the router instance

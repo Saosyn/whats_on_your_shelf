@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { login } from "../api/authAPI";
+import Auth from '../utils/auth';
+
 
 const SignIn = () => {
     const [username, setUsername] = useState("");
@@ -14,9 +16,13 @@ const SignIn = () => {
             password
         }
         // store userdata in local storage, look for the utils folder that should be a good start
-        const userData = await login(user);
-        console.log(userData)
-
+        try {
+            const data = await login(user);
+            Auth.login(data.token);
+            console.log('login successful', data.token)
+          } catch (err) {
+            console.error('Failed to login', err);
+          }
     }
 
 

@@ -4,7 +4,7 @@ const SignUp = () => {
 
     return(
         <>
-        homepage
+        signup
     </>
     )
     

@@ -1,10 +1,11 @@
 import React from "react";
+import Textbox from "../components/Textbox";
 
 const Homepage = () => {
     return(
         <>
-        homepage
-    </>
+        <Textbox />
+        </>
     )
     
 }

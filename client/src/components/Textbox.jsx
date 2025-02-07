@@ -1,19 +1,18 @@
 import { useState } from 'react';
 
-
 const Textbox = () => {
   const [query, setQuery] = useState('');
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
+  // using a map so we only store new entries
+  const [myBooks, setMyBooks] = useState(new Map());
 
   const searchBooks = async () => {
     if (!query) return;
     setLoading(true);
     try {
       const response = await fetch(
-        `https://openlibrary.org/search.json?q=${encodeURIComponent(
-          query
-        )}&limit=10`
+        `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=10`
       );
       const data = await response.json();
       const booksData = await Promise.all(
@@ -32,6 +31,7 @@ const Textbox = () => {
             'No description available.';
 
           return {
+            id: book.key, 
             title: book.title,
             author: book.author_name?.join(', ') || 'Unknown Author',
             cover: coverUrl,
@@ -44,6 +44,16 @@ const Textbox = () => {
       console.error('Error fetching data:', error);
     }
     setLoading(false);
+  };
+
+  const addToMyBooks = (book) => {
+    setMyBooks((prevBooks) => {
+      if (prevBooks.has(book.id)) return prevBooks;
+      const updatedBooks = new Map(prevBooks);
+      //this might make things a little more complicated in the long run, but for now storing unique ids and titles makes it easier to show in my books section
+      updatedBooks.set(book.id, book.title); 
+      return updatedBooks;
+    });
   };
 
   return (
@@ -61,9 +71,9 @@ const Textbox = () => {
       </button>
       {loading && <p>Loading...</p>}
       <div style={{ marginTop: '20px' }}>
-        {books.map((book, index) => (
+        {books.map((book) => (
           <div
-            key={index}
+            key={book.id}
             style={{ borderBottom: '1px solid #ddd', padding: '15px 0' }}
           >
             <h2>{book.title}</h2>
@@ -73,9 +83,20 @@ const Textbox = () => {
               alt={book.title}
               style={{ width: '150px', height: 'auto' }}
             />
-            <p className="text-yellow-300">{book.description}</p>
+            <p className="text-blue-900 text-2xl">{book.description}</p>
+            <button onClick={() => addToMyBooks(book)}>Add to "My Books"</button>
           </div>
         ))}
+      </div>
+      <div style={{ marginTop: '20px' }}>
+        <h2>My Books</h2>
+        {myBooks.size === 0 ? <p>No books added yet.</p> : (
+          <ul>
+            {[...myBooks.entries()].map(([bookId, title]) => (
+              <li key={bookId}>{title}</li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

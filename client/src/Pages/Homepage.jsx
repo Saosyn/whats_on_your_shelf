@@ -1,13 +1,14 @@
-import React from "react";
-import Textbox from "../components/Textbox";
+import React from 'react';
+import Textbox from '../components/Textbox';
+// import BookCard from '../components/BookCard';
 
 const Homepage = () => {
-    return(
-        <>
-        <Textbox />
-        </>
-    )
-    
-}
+  return (
+    <>
+      <Textbox />
+      {/* <BookCard /> */}
+    </>
+  );
+};
 
 export default Homepage;

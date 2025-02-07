@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from 'react';
 
 const Textbox = () => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -13,16 +13,18 @@ const Textbox = () => {
     setError(null);
 
     try {
-      const response = await fetch(`https://openlibrary.org/search.json?title=${query}&limit=1`);
-      if (!response.ok) throw new Error("Network response was not ok");
+      const response = await fetch(
+        `https://openlibrary.org/search.json?title=${query}&limit=1`
+      );
+      if (!response.ok) throw new Error('Network response was not ok');
 
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.includes("application/json")) {
-
-      const result = await response.json();
-      setData(result); } else {
-        throw new Error("Invalid response format (not JSON)");
-      }      
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        const result = await response.json();
+        setData(result);
+      } else {
+        throw new Error('Invalid response format (not JSON)');
+      }
     } catch (err) {
       // @ts-ignore
       setError(err.message);
@@ -52,12 +54,13 @@ const Textbox = () => {
       {error && <p className="text-red-500">{error}</p>}
       {data && (
         <ul className="mt-4 border p-2 rounded">
-          {data.
-          docs?.map((item, index) => (
+          {data.docs?.map((item, index) => (
             <li key={index} className="border-b p-2 last:border-0">
-              <p>{item.title}</p> 
+              <p>{item.title}</p>
               <p>{item.author_name}</p>
-              <img src={`https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg`} />
+              <img
+                src={`https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg`}
+              />
             </li>
           ))}
         </ul>

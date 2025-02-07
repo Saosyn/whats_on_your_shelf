@@ -1,71 +1,67 @@
 import { useState } from 'react';
 
 const Textbox = () => {
-  const [query, setQuery] = useState('');
-  const [data, setData] = useState(null);
+  const [query, setQuery] = useState("");
+  const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
-  // Function to fetch data from API
-  // @ts-ignore
-  const fetchData = async () => {
+  const searchBooks = async () => {
+    if (!query) return;
     setLoading(true);
-    setError(null);
-
     try {
       const response = await fetch(
-        `https://openlibrary.org/search.json?title=${query}&limit=1`
+        `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=10`
       );
-      if (!response.ok) throw new Error('Network response was not ok');
-
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        const result = await response.json();
-        setData(result);
-      } else {
-        throw new Error('Invalid response format (not JSON)');
-      }
-    } catch (err) {
-      // @ts-ignore
-      setError(err.message);
-    } finally {
-      setLoading(false);
+      const data = await response.json();
+      const booksData = await Promise.all(
+        data.docs.slice(0, 5).map(async (book) => {
+          const coverUrl = book.cover_i
+            ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
+            : "https://via.placeholder.com/150";
+          
+          const detailsResponse = await fetch(
+            `https://openlibrary.org${book.key}.json`
+          );
+          const details = await detailsResponse.json();
+          const description = details.description?.value || details.description || "No description available.";
+          
+          return {
+            title: book.title,
+            author: book.author_name?.join(", ") || "Unknown Author",
+            cover: coverUrl,
+            description: description,
+          };
+        })
+      );
+      setBooks(booksData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
-  };
-
-  // Handle input change and API call
-  const handleChange = (/** @type {{ target: { value: any; }; }} */ e) => {
-    const value = e.target.value;
-    setQuery(value);
-    fetchData(value); // Call API immediately (or debounce this)
+    setLoading(false);
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto">
+    <div style={{ textAlign: "center", padding: "20px" }}>
+      <h1>Book Search</h1>
       <input
         type="text"
+        placeholder="Search for a book..."
         value={query}
-        // @ts-ignore
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search..."
-        className="border p-2 w-full rounded"
+        style={{ padding: "10px", width: "300px", marginRight: "10px" }}
       />
+      <button onClick={searchBooks} style={{ padding: "10px 20px" }}>Search</button>
       {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
-      {data && (
-        <ul className="mt-4 border p-2 rounded">
-          {data.docs?.map((item, index) => (
-            <li key={index} className="border-b p-2 last:border-0">
-              <p>{item.title}</p>
-              <p>{item.author_name}</p>
-              <img
-                src={`https://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg`}
-              />
-            </li>
-          ))}
-        </ul>
-      )}
-      <button onClick={fetchData}>Search</button>
+      <div style={{ marginTop: "20px" }}>
+        {books.map((book, index) => (
+          <div key={index} style={{ borderBottom: "1px solid #ddd", padding: "15px 0" }}>
+            <h2>{book.title}</h2>
+            <h3>{book.author}</h3>
+            <img src={book.cover} alt={book.title} style={{ width: "150px", height: "auto" }} />
+            <p>{book.description}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

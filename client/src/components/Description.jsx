@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 
-const Description = (query) => {
-  // const query = query;
+const Description = () => {
+  const query = "OL45804W";
   // const [query, setQuery] = useState('');
   const [desc, setDesc] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   // Function to fetch data from API
   // @ts-ignore
   const fetchData = async () => {
-    setLoading(true);
-    setError(null);
 
     try {
       const response = await fetch(
@@ -30,31 +26,26 @@ const Description = (query) => {
     } catch (err) {
       // @ts-ignore
       setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
 
+  };
+  }
   // Handle input change and API call
 
   fetchData();
 
   return (
     <div className="p-4 max-w-md mx-auto">
-      {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
-      {desc && (
-        <ul className="mt-4 border p-2 rounded">
+      {<ul className="mt-4 border p-2 rounded">
           <li className="border-b p-2 last:border-0">
             <p>
               {
                 // @ts-ignore
-                desc.description
+                <p> {desc}</p>
               }
             </p>
           </li>
         </ul>
-      )}
+      }
     </div>
   );
 };

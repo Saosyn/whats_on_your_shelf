@@ -1,4 +1,6 @@
 module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx,html}"],
+
   mode: 'jit',
 
   purge: [],
@@ -11,3 +13,4 @@ module.exports = {
   },
   plugins: [],
 };
+

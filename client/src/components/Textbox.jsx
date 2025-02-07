@@ -72,7 +72,7 @@ const Textbox = () => {
               alt={book.title}
               style={{ width: '150px', height: 'auto' }}
             />
-            <p>{book.description}</p>
+            <p className="text-yellow-300">{book.description}</p>
           </div>
         ))}
       </div>

@@ -27,13 +27,14 @@ const Textbox = () => {
     setMyBooks((prevBooks) => {
       if (prevBooks.has(book.id)) return prevBooks;
       const updatedBooks = new Map(prevBooks);
-      updatedBooks.set(book.id, book.title);
-      
+      updatedBooks.set(book.id, 
+       book.title,
+      );
+  
       saveToLocalStorage(updatedBooks); // Save to local storage
       return updatedBooks;
     });
   };
-
   // **Re-adding the missing searchBooks function**
   const searchBooks = async () => {
     if (!query) return;
@@ -85,3 +86,34 @@ const Textbox = () => {
 };
 
 export default Textbox;
+
+// const addToMyBooks = (book) => {
+//   setMyBooks((prevBooks) => {
+//     if (prevBooks.has(book.id)) return prevBooks;
+//     const updatedBooks = new Map(prevBooks);
+//     updatedBooks.set(book.id, book);
+//     localStorage.setItem("myBooks", JSON.stringify([...updatedBooks]));
+//     return updatedBooks;
+//   });
+// };
+
+// const removeFromMyBooks = (book) => {
+//   setMyBooks((prevBooks) => {
+//     const updatedBooks = new Map(prevBooks);
+//     updatedBooks.delete(book.id);
+//     localStorage.setItem("myBooks", JSON.stringify([...updatedBooks]));
+//     return updatedBooks;
+//   });
+
+
+
+// const addToMyBooks = (book) => {
+//   setMyBooks((prevBooks) => {
+//     if (prevBooks.has(book.id)) return prevBooks;
+//     const updatedBooks = new Map(prevBooks);
+//     updatedBooks.set(book.id, {
+//       title: book.title,
+//       cover: book.cover,
+//       author: book.author,
+//       description: book.description,
+//     });

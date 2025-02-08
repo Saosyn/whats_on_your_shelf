@@ -1,4 +1,5 @@
 import React from "react";
+import AddToListButton from "./AddToListButton";
 
 const BookCard = ({ book, addToMyBooks }) => {
   return (
@@ -15,8 +16,7 @@ const BookCard = ({ book, addToMyBooks }) => {
           <h3 className="text-lg line-clamp-2">{book.author}</h3>
           <p className="text-gray-700 line-clamp-3 break-words pt-2 ">{book.description}</p>
         </div>
-      
-      <button onClick={() => addToMyBooks(book)} className="bg-[#ff5a5a] text-white px-4 py-2 rounded-md hover:bg-[#ff5a5a]">Add to "My Books"</button>
+      <AddToListButton book={book} addToMyBooks={addToMyBooks}/>      
     </div>
   );
 };

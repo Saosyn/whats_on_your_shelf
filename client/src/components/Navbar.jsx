@@ -17,6 +17,9 @@ export default function Navbar(){
                         <li className="mr-4  hover:bg-blue-400 hover:text-lg hover:text-white transition-all duration-300 p-2 rounded">
                             <Link to='/'>Home</Link>
                         </li>
+                        <li className="mr-4  hover:bg-blue-400 hover:text-lg hover:text-white transition-all duration-300 p-2 rounded">
+                            <Link to='/results'>Book Search</Link>
+                        </li>
                     </ul>
                 </div>
             </div>

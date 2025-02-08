@@ -7,6 +7,7 @@ import SignIn from './Pages/SignIn'
 import './index.css'
 import App from './App.jsx'
 import React from 'react'
+import Results from './Pages/Results';
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: 'signin',
         element: <SignIn />,
+      },
+      {
+        path: 'results',
+        element: <Results />,
       }
     ],
   },

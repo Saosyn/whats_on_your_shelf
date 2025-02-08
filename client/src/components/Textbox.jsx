@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Search from "./Search";
 import SearchResults from "./SearchResults";
+import MyBooks from "./MyBooks";
 
 const Textbox = () => {
   const [query, setQuery] = useState("");
@@ -79,18 +80,6 @@ const Textbox = () => {
       {/* Now searchBooks is correctly passed down */}
       <Search query={query} setQuery={setQuery} searchBooks={searchBooks} />
       <SearchResults books={books} addToMyBooks={addToMyBooks} loading={loading} />
-      <div style={{ marginTop: "20px" }}>
-        <h2>My Books</h2>
-        {myBooks.size === 0 ? (
-          <p>No books added yet.</p>
-        ) : (
-          <ul>
-            {[...myBooks.entries()].map(([bookId, title]) => (
-              <li key={bookId}>{title}</li>
-            ))}
-          </ul>
-        )}
-      </div>
     </div>
   );
 };

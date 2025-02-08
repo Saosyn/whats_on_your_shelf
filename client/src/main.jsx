@@ -8,6 +8,7 @@ import './index.css'
 import App from './App.jsx'
 import React from 'react'
 import Results from './Pages/Results';
+import Library from './Pages/Library';
 
 
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: 'results',
         element: <Results />,
+      },
+      {
+        path: 'library',
+        element: <Library />,
       }
     ],
   },

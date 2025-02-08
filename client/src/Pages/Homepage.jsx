@@ -3,10 +3,10 @@ import React from 'react';
 
 const Homepage = () => {
   return (
-    <>
+    <div>
       <p>welcome</p>
       {/* <BookCard /> */}
-    </>
+    </div>
   );
 };
 

@@ -4,10 +4,10 @@ import Textbox from '../components/Textbox';
 
 const Results = () => {
   return (
-    <>
+    <div className=''>
       <Textbox />
       {/* <BookCard /> */}
-    </>
+    </div>
   );
 };
 

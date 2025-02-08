@@ -57,7 +57,7 @@ const Textbox = () => {
   };
 
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
+    <div>
       <h1>Book Search</h1>
       <Search query={query} setQuery={setQuery} searchBooks={searchBooks} />
       {loading && <p>Loading...</p>}

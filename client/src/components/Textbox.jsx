@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import Search from "./Search";
-import BookCard from "./BookCard";
+import SearchResults from "./SearchResults";
 
 const Textbox = () => {
   const [query, setQuery] = useState("");
@@ -8,6 +9,31 @@ const Textbox = () => {
   const [loading, setLoading] = useState(false);
   const [myBooks, setMyBooks] = useState(new Map());
 
+  // Load saved books from localStorage when component mounts
+  useEffect(() => {
+    const savedBooks = localStorage.getItem("myBooks");
+    if (savedBooks) {
+      setMyBooks(new Map(JSON.parse(savedBooks)));
+    }
+  }, []);
+
+  // Function to store books in localStorage
+  const saveToLocalStorage = (booksMap) => {
+    localStorage.setItem("myBooks", JSON.stringify([...booksMap]));
+  };
+
+  const addToMyBooks = (book) => {
+    setMyBooks((prevBooks) => {
+      if (prevBooks.has(book.id)) return prevBooks;
+      const updatedBooks = new Map(prevBooks);
+      updatedBooks.set(book.id, book.title);
+      
+      saveToLocalStorage(updatedBooks); // Save to local storage
+      return updatedBooks;
+    });
+  };
+
+  // **Re-adding the missing searchBooks function**
   const searchBooks = async () => {
     if (!query) return;
     setLoading(true);
@@ -47,25 +73,12 @@ const Textbox = () => {
     setLoading(false);
   };
 
-  const addToMyBooks = (book) => {
-    setMyBooks((prevBooks) => {
-      if (prevBooks.has(book.id)) return prevBooks;
-      const updatedBooks = new Map(prevBooks);
-      updatedBooks.set(book.id, book.title);
-      return updatedBooks;
-    });
-  };
-
   return (
     <div>
       <h1>Book Search</h1>
+      {/* Now searchBooks is correctly passed down */}
       <Search query={query} setQuery={setQuery} searchBooks={searchBooks} />
-      {loading && <p>Loading...</p>}
-      <div style={{ marginTop: "20px" }}>
-        {books.map((book) => (
-          <BookCard key={book.id} book={book} addToMyBooks={addToMyBooks} />
-        ))}
-      </div>
+      <SearchResults books={books} addToMyBooks={addToMyBooks} loading={loading} />
       <div style={{ marginTop: "20px" }}>
         <h2>My Books</h2>
         {myBooks.size === 0 ? (

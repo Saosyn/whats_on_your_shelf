@@ -13,17 +13,13 @@ import type { Request, Response } from 'express';
 import express from 'express';
 import axios from 'axios';
 
-// const express = require('express');
-// const axios = require('axios'); // A library for making HTTP requests
 const router = express();
 router.use(express.json());
 
-// GET route to fetch books from Open Library API
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const searchTerm = req.query.search as string; // Get the search term from query parameters
+    const searchTerm = req.query.search as string; 
 
-    // Fetch book data from Open Library API using axios
     const openLibraryResponse = await axios.get(
       `http://openlibrary.org/search.json?q=${encodeURIComponent(
         searchTerm

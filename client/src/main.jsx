@@ -9,6 +9,7 @@ import App from './App.jsx'
 import React from 'react'
 import Results from './Pages/Results';
 import Library from './Pages/Library';
+import BookPage from './components/BookPage';
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: 'library',
         element: <Library />,
+      },
+      {
+        path: '/book/works/:workId',
+        element: <BookPage />,
       }
     ],
   },

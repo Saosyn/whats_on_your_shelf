@@ -9,7 +9,7 @@ function App() {
   // const [count, setCount] = useState(0)
 
   return (
-    <div className='bg-[#FCFAFC] text-center p-5'>
+    <div className='bg-[#FCFAFC] text-center'>
       <Navbar />
       <div>
         <Outlet />

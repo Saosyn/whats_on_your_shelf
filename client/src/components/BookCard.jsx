@@ -3,7 +3,7 @@ import AddToListButton from "./AddToListButton";
 
 const BookCard = ({ book, addToMyBooks }) => {
   return (
-    <div className="flex flex-wrap flex-col border-1 border-[#D9D9D9] rounded-lg pb-8 pt-3.5 px-3.5 max-w-[350px] max-h-[900px]">
+    <div className="flex flex-wrap flex-col border-1 bg-white  border-[#D9D9D9] rounded-lg pb-8 pt-3.5 px-3.5 max-w-[350px] max-h-[900px]">
       <div className="h-[500px] w-auto">
         <img
           src={book.cover}

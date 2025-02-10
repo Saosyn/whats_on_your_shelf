@@ -76,8 +76,7 @@ const Textbox = () => {
   };
 
   return (
-    <div>
-      <h1>Book Search</h1>
+    <div className="flex flex-wrap justify-center align-middle">
       {/* Now searchBooks is correctly passed down */}
       <Search query={query} setQuery={setQuery} searchBooks={searchBooks} />
       <SearchResults books={books} addToMyBooks={addToMyBooks} loading={loading} />

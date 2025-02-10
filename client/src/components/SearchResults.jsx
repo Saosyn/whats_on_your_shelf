@@ -3,7 +3,7 @@ import BookCard from "./BookCard";
 
 const SearchResults = ({ books, addToMyBooks, loading }) => {
   return (
-    <div style={{ marginTop: "20px" }}>
+    <div className="mt-20 flex flex-wrap justify-center align-middle">
       {loading ? (
         <p>Loading...</p>
       ) : (

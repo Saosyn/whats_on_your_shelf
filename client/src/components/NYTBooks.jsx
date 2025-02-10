@@ -27,11 +27,26 @@ const NYTBooks = () => {
     <div className="grid grid-cols-3 gap-4 p-4">
       {Object.entries(books).map(([category, bookList]) => (
         <div key={category} className="p-4 border rounded shadow-lg">
-          <h2 className="text-xl font-bold">{category}</h2>
+          <h2 className="text-xl font-bold mb-4">{category}</h2>
           <ul>
             {bookList.map((book, index) => (
-              <li key={index} className="mt-2">
-                <strong>{book.title}</strong> by {book.author}
+              <li key={index} className="mt-2 flex items-center space-x-4">
+                {book.coverUrl ? (
+                  <img
+                    src={book.coverUrl}
+                    alt={book.title}
+                    className="w-16 h-auto rounded"
+                  />
+                ) : (
+                  // Optionally, display a placeholder if no cover is available:
+                  <div className="w-16 h-24 bg-gray-200 flex items-center justify-center rounded">
+                    <span className="text-xs text-gray-500">No Cover</span>
+                  </div>
+                )}
+                <div>
+                  <strong>{book.title}</strong>
+                  <p className="text-sm text-gray-700">by {book.author}</p>
+                </div>
               </li>
             ))}
           </ul>

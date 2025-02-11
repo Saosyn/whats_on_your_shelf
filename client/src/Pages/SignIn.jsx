@@ -1,41 +1,42 @@
-import React from "react";
-import { useState } from "react";
-import { login } from "../api/authAPI";
+import React from 'react';
+import { useState } from 'react';
+import { login } from '../api/authAPI';
 import Auth from '../utils/auth';
 
-
 const SignIn = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-
-    const formSubmit = async (event) => {
-        event.preventDefault();
-        const user = {
-            username,
-            password
-        }
-        // store userdata in local storage, look for the utils folder that should be a good start
-        try {
-            const data = await login(user);
-            Auth.login(data.token);
-            console.log('login successful', data.token)
-          } catch (err) {
-            console.error('Failed to login', err);
-          }
+  const formSubmit = async (event) => {
+    event.preventDefault();
+    const user = {
+      username,
+      password,
+    };
+    // store userdata in local storage, look for the utils folder that should be a good start
+    try {
+      const data = await login(user);
+      Auth.login(data.token);
+      console.log('login successful', data.token);
+    } catch (err) {
+      console.error('Failed to login', err);
     }
+  };
 
-
-    return(
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <form 
-        onSubmit={formSubmit} 
+  return (
+    <div className="flex justify-center items-center min-h-screen ">
+      <form
+        onSubmit={formSubmit}
         className="bg-white p-6 rounded-lg shadow-lg w-80"
       >
-        <h2 className="text-center text-2xl font-bold text-[#FF7272] mb-4">Login</h2>
+        <h2 className="text-center text-2xl font-bold text-[#FF7272] mb-4">
+          Login
+        </h2>
 
         <div className="mb-4">
-          <label htmlFor="username" className="block text-gray-700 font-medium">Username</label>
+          <label htmlFor="username" className="block text-gray-700 font-medium">
+            Username
+          </label>
           <input
             id="username"
             type="text"
@@ -47,7 +48,9 @@ const SignIn = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-700 font-medium">Password</label>
+          <label htmlFor="password" className="block text-gray-700 font-medium">
+            Password
+          </label>
           <input
             id="password"
             type="password"
@@ -66,8 +69,7 @@ const SignIn = () => {
         </button>
       </form>
     </div>
-    )
-   
-}
+  );
+};
 
 export default SignIn;

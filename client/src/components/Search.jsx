@@ -12,7 +12,7 @@ const Search = ({ query, setQuery, searchBooks }) => {
       />
       <button
         onClick={searchBooks}
-        className="h-8 px-5 bg-[#FF7272] text-white rounded-lg hover:bg-[#FF3737] transition flex items-center justify-center"
+        className="h-8 px-5 bg-[#FF7272] text-white rounded-lg hover:bg-[#FF3737] transition flex items-center justify-center cursor-pointer"
       >
         Search
       </button>

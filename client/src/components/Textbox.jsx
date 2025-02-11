@@ -86,7 +86,7 @@ const Textbox = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center items-center">
+    <div className="flex flex-wrap justify-center items-center mt-12">
       <Search query={query} setQuery={setQuery} searchBooks={searchBooks} />
       <SearchResults
         books={books}

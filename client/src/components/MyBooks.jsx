@@ -32,7 +32,7 @@ const BookList = () => {
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto bg-white rounded-lg shadow-md">
+    <div className="p-4 w-3xl mx-auto bg-white rounded-lg shadow-md mt-12">
       <h2 className="text-xl font-semibold mb-4">My Book List</h2>
       {books.length > 0 ? (
         <ul className="list-disc list-inside">
@@ -43,15 +43,15 @@ const BookList = () => {
                 ? titleValue.title
                 : titleValue;
             return (
-              <li key={index} className="flex justify-between items-center">
+              <li key={index} className="flex justify-between items-center mt-6 mb-6">
                 <span
-                  className="text-blue-600 cursor-pointer hover:underline"
+                  className="text-black cursor-pointer hover:underline"
                   onClick={() => handleBookClick(workId)}
                 >
                   {displayTitle}
                 </span>
                 <button
-                  className="ml-4 px-3 py-1 text-sm text-white bg-red-200 rounded hover:bg-red-600"
+                  className="cursor-pointer ml-4 px-3 py-1 text-sm text-white bg-[#ff5a5a] rounded hover:bg-red-600"
                   onClick={() => handleRemoveBook(workId)}
                 >
                   Remove

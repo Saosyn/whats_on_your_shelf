@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div>
       <h1 className="text-3xl font-bold text-center mt-6">Top Books</h1>
-      <NYTBooks />
+      {/* <NYTBooks /> */}
     </div>
   );
 };

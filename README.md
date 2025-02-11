@@ -80,3 +80,32 @@ _(Installation instructions go here...)_
 
 - **Open Library API:**  
   Used for searching books, fetching book details, and retrieving cover images. If a cover isn’t available, a default placeholder image is displayed.
+
+## Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork the repository.
+2. Create a feature branch:
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add some feature"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin feature/your-feature
+   ```
+5. Open a pull request describing your changes.
+
+For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+If you have any questions or suggestions, please contact us at tehli1882@gmail.com.

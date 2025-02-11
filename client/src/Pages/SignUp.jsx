@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import SignUpModal from '../components/SignUpModal';
 
 const SignUp = () => {
-  const formSubmit = () => console.log('form submitted');
+  // State to control modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // When the form is submitted, open the modal.
+  const formSubmit = (e) => {
+    e.preventDefault();
+    // For now, we simply open the modal instead of processing the form.
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <form
@@ -23,22 +33,20 @@ const SignUp = () => {
             id="firstName"
             type="text"
             placeholder="Enter your first name..."
-            name="username"
-            // onChange={(event) => setUsername(event.target.value)}
+            name="firstName"
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7272]"
           />
         </div>
 
         <div className="mb-4">
-          <label htmlFor="LastName" className="block text-gray-700 font-medium">
+          <label htmlFor="lastName" className="block text-gray-700 font-medium">
             Last Name
           </label>
           <input
             id="lastName"
             type="text"
             placeholder="Enter your last name..."
-            name="username"
-            // onChange={(event) => setUsername(event.target.value)}
+            name="lastName"
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7272]"
           />
         </div>
@@ -52,7 +60,6 @@ const SignUp = () => {
             type="text"
             placeholder="Enter your username..."
             name="username"
-            // onChange={(event) => setUsername(event.target.value)}
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7272]"
           />
         </div>
@@ -66,7 +73,8 @@ const SignUp = () => {
             type="password"
             placeholder="Enter your password..."
             name="password"
-            onChange={(event) => setPassword(event.target.value)}
+            // Uncomment or add your setPassword handler if needed.
+            // onChange={(event) => setPassword(event.target.value)}
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF7272]"
           />
         </div>
@@ -78,6 +86,9 @@ const SignUp = () => {
           Sign Up
         </button>
       </form>
+
+      {/* Conditionally render the modal */}
+      {isModalOpen && <SignUpModal setIsOpen={setIsModalOpen} />}
     </div>
   );
 };
